@@ -1,63 +1,32 @@
 package pawelkuruc.issInfo;
 
-import java.util.Scanner;
+import javax.swing.*;
 
-public class Main
-{
-    static String URI = "http://api.open-notify.org/iss-now.json";
+import pawelkuruc.issInfo.Controller.APIHandler;
+import pawelkuruc.issInfo.Controller.ISSVelocityMeasurement;
+import pawelkuruc.issInfo.Model.ISSData;
+import pawelkuruc.issInfo.Model.JSONParser;
+import pawelkuruc.issInfo.Model.Properties;
+import pawelkuruc.issInfo.View.ConnectionError;
+import pawelkuruc.issInfo.View.ISSInfo;
 
-    public static void main(String args[]) {
-        ISSVelocityMeasurement threadVelocity = new ISSVelocityMeasurement(URI);
-        threadVelocity.start();
+public class Main{
+    public static ISSVelocityMeasurement threadVelocity = new ISSVelocityMeasurement(Properties.URI);
+    public static ISSData issInitialStatus = new ISSData();
+
+    public static void main(String[] args){
 
         try {
-            ISSData issInitialStatus = JSONParser.getISSData(APIHandler.getJson(URI));
+            JFrame frame = new JFrame("ISSInfo");
+            frame.setContentPane(new ISSInfo().issInfoView);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
 
-            System.out.println("Aktualna pozycja stacji ISS" +
-                    "\nszerokość: "+issInitialStatus.getIssPosition().getLatitude() +
-                    "\ndługość: "+issInitialStatus.getIssPosition().getLongitude());
-
-            while(true){
-                boolean exit = false;
-                Scanner scan = new Scanner(System.in);
-
-                String command = scan.nextLine();
-
-                double velocity;
-
-                switch (command){
-                    case "distance":                                                      //obliczanie drogi
-                        double distance = ISSDataCalculator.calculateDistance(issInitialStatus,JSONParser.getISSData(APIHandler.getJson(URI)));
-                        System.out.println("Stacja ISS przebyła "+distance/1000+" km od momentu uruchomienia tego programu.");
-                        break;
-
-                    case "velocity":
-                        velocity = threadVelocity.getVelocity();
-                        System.out.println("Prędkość ISS wynosi "+velocity+" m/s = "+velocity*3.6+" km/h = "+velocity/1000+" km/s.");
-                        break;
-
-                    case "help":
-                        System.out.println("help - wyświetla listę komend" +                         //wyświetlenie komend
-                                "\nexit - kończy program" +
-                                "\ndistance - wyświetla dystans przebyty przez stację ISS od startu programu" +
-                                "\nvelocity - oblicza aktualną prędkość stacji ISS");
-                        break;
-
-                    case "exit":
-                        exit = true;
-                        break;
-
-                    default:
-                        System.out.println("Nieznane polecenie, wpisz \"help\", aby uzyskać informację.");
-
-                }
-                if (exit == true) break;
-            }
-
-        } catch (Exception e) {
+            issInitialStatus = JSONParser.getISSData(APIHandler.getJson(Properties.URI));
+            threadVelocity.start();
+        } catch (Exception e){
             e.printStackTrace();
-        }finally {
-            threadVelocity.exitMeasurement = true;
         }
     }
 }

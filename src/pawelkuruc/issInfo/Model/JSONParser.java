@@ -1,6 +1,7 @@
-package pawelkuruc.issInfo;
+package pawelkuruc.issInfo.Model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import pawelkuruc.issInfo.Model.ISSData;
 
 import java.io.IOException;
 
