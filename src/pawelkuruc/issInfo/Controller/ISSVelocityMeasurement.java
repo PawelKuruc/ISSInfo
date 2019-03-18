@@ -1,5 +1,10 @@
-package pawelkuruc.issInfo;
+package pawelkuruc.issInfo.Controller;
 
+import pawelkuruc.issInfo.Model.JSONParser;
+import pawelkuruc.issInfo.Model.ISSData;
+import pawelkuruc.issInfo.Main;
+
+import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
 public class ISSVelocityMeasurement extends Thread {

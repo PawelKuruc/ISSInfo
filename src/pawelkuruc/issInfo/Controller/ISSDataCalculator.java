@@ -1,4 +1,6 @@
-package pawelkuruc.issInfo;
+package pawelkuruc.issInfo.Controller;
+
+import pawelkuruc.issInfo.Model.ISSData;
 
 public class ISSDataCalculator {
 
