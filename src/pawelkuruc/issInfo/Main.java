@@ -7,7 +7,6 @@ import pawelkuruc.issInfo.Controller.ISSVelocityMeasurement;
 import pawelkuruc.issInfo.Model.ISSData;
 import pawelkuruc.issInfo.Model.JSONParser;
 import pawelkuruc.issInfo.Model.Properties;
-import pawelkuruc.issInfo.View.ConnectionError;
 import pawelkuruc.issInfo.View.ISSInfo;
 
 public class Main{
