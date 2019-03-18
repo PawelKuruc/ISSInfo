@@ -56,18 +56,10 @@
       </component>
       <component id="53556" class="javax.swing.JButton" binding="vRefreshButton">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Refresh"/>
-        </properties>
-      </component>
-      <component id="4ff06" class="javax.swing.JButton" binding="sRefreshButton">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Refresh"/>
+          <text value="Odśwież"/>
         </properties>
       </component>
       <hspacer id="25976">
