@@ -2,7 +2,7 @@ package pawelkuruc.issInfo.Controller;
 
 import pawelkuruc.issInfo.Model.ISSData;
 
-public class ISSDataCalculator {
+public abstract class ISSDataCalculator {
 
     public static double calculateDistance(ISSData issInitialStatus, ISSData issCurrentStatus){
 

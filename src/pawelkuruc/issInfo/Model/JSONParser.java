@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
-public class JSONParser
+public abstract class JSONParser
 {
     public static ISSData getISSData(String jsonFile) throws IOException
     {

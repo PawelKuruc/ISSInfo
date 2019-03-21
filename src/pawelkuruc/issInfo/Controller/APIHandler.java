@@ -7,7 +7,7 @@ import pawelkuruc.issInfo.View.ConnectionError;
 
 import javax.swing.*;
 
-public class APIHandler
+public abstract class APIHandler
 {
     public static String getJson(String uri)throws RuntimeException
     {
