@@ -4,8 +4,6 @@ import pawelkuruc.issInfo.Model.JSONParser;
 import pawelkuruc.issInfo.Model.ISSData;
 import pawelkuruc.issInfo.Model.Properties;
 
-import java.util.concurrent.TimeUnit;
-
 public class ISSVelocityMeasurement extends Thread {
 
     private String uri;
@@ -20,32 +18,38 @@ public class ISSVelocityMeasurement extends Thread {
         return this.velocity;
     }
 
+    @Override
     public void run() {
         System.out.println("Thread: " +
                 this.getName()+
-                " - uruchomiono pomiar prędkości");
+                " - velocity measurement has been started");
 
         ISSData issStatus1;
         ISSData issStatus2;
 
-        try {
-        while(true) {
-            issStatus1 = JSONParser.getISSData(APIHandler.getJson(uri));
-            TimeUnit.SECONDS.sleep(Properties.readingInterval);
-            issStatus2 = JSONParser.getISSData(APIHandler.getJson(uri));
+        do {
+            try {
 
-            this.velocity = ISSDataCalculator.calculateVelocity(issStatus1, issStatus2);
-        }
+                issStatus1 = JSONParser.getISSData(APIHandler.getJson(uri));
+                Thread.sleep(Properties.readingInterval * 1000);
+                issStatus2 = JSONParser.getISSData(APIHandler.getJson(uri));
 
-        }catch(InterruptedException i){
-            System.out.println("przerwano wątek");
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            System.out.println("Thread: " +
-                    this.getName()+
-                    " - zakończono pomiar prędkości");
-        }
+                this.velocity = ISSDataCalculator.calculateVelocity(issStatus1, issStatus2);
+                System.out.println("Thread: " +
+                        this.getName()+
+                        " - new velocity value: "+
+                        velocity);
+
+            } catch (InterruptedException i) {
+                System.out.println("Thread: " +
+                        this.getName() +
+                        " - velocity measurement has been interrupted");
+                velocity = 0;
+                Thread.currentThread().interrupt();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }while(!Thread.interrupted());
     }
 
 }

@@ -23,7 +23,7 @@ public class Main{
             frame.setVisible(true);
 
             issInitialStatus = JSONParser.getISSData(APIHandler.getJson(Properties.URI));
-            threadVelocity.start();
+            //threadVelocity.start();
         } catch (Exception e){
             e.printStackTrace();
         }

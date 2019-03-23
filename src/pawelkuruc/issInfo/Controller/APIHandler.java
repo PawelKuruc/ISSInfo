@@ -3,12 +3,15 @@ package pawelkuruc.issInfo.Controller;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import pawelkuruc.issInfo.View.ConnectionError;
+import org.jetbrains.annotations.Nullable;
+import pawelkuruc.issInfo.Main;
+import pawelkuruc.issInfo.Model.Properties;
 
 import javax.swing.*;
 
 public abstract class APIHandler
 {
+    @Nullable
     public static String getJson(String uri)throws RuntimeException
     {
             try {
@@ -25,11 +28,8 @@ public abstract class APIHandler
 
                 return apiClientResponse.getEntity(String.class);
             }catch(Exception e) {
-                JFrame frame = new JFrame("ConnectionError");
-                frame.setContentPane(new ConnectionError().errorView);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
+                JOptionPane.showMessageDialog(null, Properties.connectionErrorMessage);
+                Main.threadVelocity.interrupt();
             }
             return null;
     }

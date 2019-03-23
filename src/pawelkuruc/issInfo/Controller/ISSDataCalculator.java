@@ -1,10 +1,11 @@
 package pawelkuruc.issInfo.Controller;
 
+import org.jetbrains.annotations.NotNull;
 import pawelkuruc.issInfo.Model.ISSData;
 
 public abstract class ISSDataCalculator {
 
-    public static double calculateDistance(ISSData issInitialStatus, ISSData issCurrentStatus){
+    public static double calculateDistance(@NotNull ISSData issInitialStatus, @NotNull ISSData issCurrentStatus){
 
         double lat1 = Double.parseDouble(issInitialStatus.getIssPosition().getLatitude());
         double lon1 = Double.parseDouble(issInitialStatus.getIssPosition().getLongitude());

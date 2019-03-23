@@ -6,10 +6,14 @@ import java.io.IOException;
 
 public abstract class JSONParser
 {
-    public static ISSData getISSData(String jsonFile) throws IOException
+    public static ISSData getISSData(String jsonFile)
     {
-        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
 
-        return mapper.readValue(jsonFile, ISSData.class);
+            return mapper.readValue(jsonFile, ISSData.class);
+        }catch (Exception e){
+            return null;
+        }
     }
 }
