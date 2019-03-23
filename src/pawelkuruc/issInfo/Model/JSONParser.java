@@ -1,11 +1,11 @@
 package pawelkuruc.issInfo.Model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class JSONParser
 {
+    @Nullable
     public static ISSData getISSData(String jsonFile)
     {
         try {

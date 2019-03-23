@@ -15,7 +15,7 @@ public class ISSVelocityMeasurement extends Thread {
     }
 
     public double getVelocity(){
-        return this.velocity;
+        return velocity;
     }
 
     @Override
