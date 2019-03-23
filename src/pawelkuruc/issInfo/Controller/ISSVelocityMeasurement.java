@@ -2,13 +2,14 @@ package pawelkuruc.issInfo.Controller;
 
 import pawelkuruc.issInfo.Model.JSONParser;
 import pawelkuruc.issInfo.Model.ISSData;
+import pawelkuruc.issInfo.Model.Properties;
+
 import java.util.concurrent.TimeUnit;
 
 public class ISSVelocityMeasurement extends Thread {
 
     private String uri;
     private double velocity;
-    private int readingInterval = 5;
 
     public ISSVelocityMeasurement(String uri){
         super("VelocityCalculator");
@@ -30,7 +31,7 @@ public class ISSVelocityMeasurement extends Thread {
         try {
         while(true) {
             issStatus1 = JSONParser.getISSData(APIHandler.getJson(uri));
-            TimeUnit.SECONDS.sleep(readingInterval);
+            TimeUnit.SECONDS.sleep(Properties.readingInterval);
             issStatus2 = JSONParser.getISSData(APIHandler.getJson(uri));
 
             this.velocity = ISSDataCalculator.calculateVelocity(issStatus1, issStatus2);
